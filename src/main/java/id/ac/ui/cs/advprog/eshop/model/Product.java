@@ -10,7 +10,7 @@ public class Product {
     private int productQuantity;
     private static int idCounter = 1;
 
-    public void setId() {
+    public void setIdByCounter() {
         this.productId = idCounter++ + "";
     }
 }
