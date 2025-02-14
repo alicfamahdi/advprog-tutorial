@@ -16,7 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
-class HomePageFunctionalTest {
+public class CreateProductFunctionalTest {
 
     /**
      * The port number assigned to the running application during test execution.
@@ -33,21 +33,29 @@ class HomePageFunctionalTest {
     void setupTest() {
         baseUrl = String.format("%s:%d", testBaseUrl, serverPort);
     }
+
     @Test
-    void pageTitle_isCorrect (ChromeDriver driver) throws Exception {
-        // Exercise
-        driver.get(baseUrl);
+    void createProductPage_isCorrect (ChromeDriver driver) throws Exception {
+        driver.get(baseUrl + "/product/create");
+
+        WebElement productNameField = driver.findElement(By.id("product-name"));
+        productNameField.clear();
+        productNameField.sendKeys("Test");
+
+        WebElement productQuantityField = driver.findElement(By.id("product-quantity"));
+        productQuantityField.clear();
+        productQuantityField.sendKeys("5");
+
+        WebElement submitButton = driver.findElement(By.id("submit-button"));
+        submitButton.click();
+
         String pageTitle = driver.getTitle();
-        // Verify
-        assertEquals("ADV Shop", pageTitle);
-    }
-    @Test
-    void welcomeMessage_homePage_isCorrect (ChromeDriver driver) throws Exception {
-        // Exercise
-        driver.get(baseUrl);
-        String welcomeMessage = driver.findElement(By.tagName("h3"))
-                .getText();
-        // Verify
-        assertEquals("Welcome", welcomeMessage);
+        assertEquals("Product List", pageTitle);
+
+        String productName = driver.findElement(By.xpath("//tbody/tr[1]/td[1]")).getText();
+        String productQuantity = driver.findElement(By.xpath("//tbody/tr[1]/td[2]")).getText();
+
+        assertEquals("Test", productName);
+        assertEquals("5", productQuantity);
     }
 }
