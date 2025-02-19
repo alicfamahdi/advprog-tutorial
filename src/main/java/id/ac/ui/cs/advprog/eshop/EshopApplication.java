@@ -7,8 +7,6 @@ import javax.annotation.processing.Generated;
 
 @SpringBootApplication
 public class EshopApplication {
-    @Generated(value = "Spring Boot")
-    @SuppressWarnings("unused")
     public static void main(String[] args) {
         SpringApplication.run(EshopApplication.class, args);
     }
