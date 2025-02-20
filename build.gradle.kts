@@ -5,6 +5,16 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
 }
 
+sonar {
+    properties {
+        property("sonar.projectKey", "alicfamahdi_advprog-tutorial")
+        property("sonar.organization", "alicfamahdi")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.gradle.skipCompile", "true")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
+    }
+}
+
 group = "id.ac.ui.cs.advprog"
 version = "0.0.1-SNAPSHOT"
 
