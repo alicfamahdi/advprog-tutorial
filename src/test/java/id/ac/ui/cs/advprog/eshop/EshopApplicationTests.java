@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class EshopApplicationTests {
 
     @Test
-    public void testMainWithArguments() {
+    void testMainWithArguments() {
         String[] args = { "--spring.profiles.active=test" };
         EshopApplication.main(args);
     }
