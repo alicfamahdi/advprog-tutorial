@@ -2,7 +2,6 @@ package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,17 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductRepositoryTest {
     @InjectMocks
     ProductRepository productRepository;
-    @BeforeEach
-    void setUp() {
 
-    }
     @Test
     void testCreateAndFindProduct() {
         Product product = new Product();
-        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(100);
         productRepository.createProduct(product);
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         Iterator<Product> productIterator = productRepository.findAllProducts();
         assertTrue(productIterator.hasNext());
@@ -46,16 +42,16 @@ class ProductRepositoryTest {
     @Test
     void testFindAllIfMoreThanOneProduct() {
         Product product1 = new Product();
-        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
         productRepository.createProduct(product1);
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         Product product2 = new Product();
-        product2.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
         product2.setProductName("Sampo Cap Usep");
         product2.setProductQuantity(50);
         productRepository.createProduct(product2);
+        product2.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
 
         Iterator<Product> productIterator = productRepository.findAllProducts();
         assertTrue(productIterator.hasNext());
@@ -69,10 +65,10 @@ class ProductRepositoryTest {
     @Test
     void testCreateAndEditProduct() {
         Product product1 = new Product();
-        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
         productRepository.createProduct(product1);
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         Product product2 = new Product();
         product2.setProductId(product1.getProductId());
@@ -87,10 +83,10 @@ class ProductRepositoryTest {
     @Test
     void testCreateDeleteProduct() {
         Product product1 = new Product();
-        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
         productRepository.createProduct(product1);
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         productRepository.deleteProduct(product1.getProductId());
         Iterator<Product> productIterator = productRepository.findAllProducts();
@@ -100,10 +96,10 @@ class ProductRepositoryTest {
     @Test
     void testCreateEditDeleteProduct() {
         Product product1 = new Product();
-        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
         productRepository.createProduct(product1);
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         Product product2 = new Product();
         product2.setProductId(product1.getProductId());
@@ -145,9 +141,9 @@ class ProductRepositoryTest {
     @Test
     void testFindProductByIdIfNull() {
         Product product1 = new Product();
-        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         Product foundProduct = productRepository.findProductById(product1.getProductId());
         assertNull(foundProduct);

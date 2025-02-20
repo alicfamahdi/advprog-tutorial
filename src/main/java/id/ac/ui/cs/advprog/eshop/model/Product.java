@@ -8,9 +8,4 @@ public class Product {
     private String productId;
     private String productName;
     private int productQuantity;
-    private static int idCounter = 1;
-
-    public void setIdByCounter() {
-        this.productId = idCounter++ + "";
-    }
 }

@@ -17,7 +17,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
-        product.setIdByCounter();
         productRepository.createProduct(product);
         return product;
     }
