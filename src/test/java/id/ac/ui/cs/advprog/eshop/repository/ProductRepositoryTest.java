@@ -151,4 +151,5 @@ class ProductRepositoryTest {
         Product foundProduct = productRepository.findProductById(product1.getProductId());
         assertNull(foundProduct);
     }
+
 }

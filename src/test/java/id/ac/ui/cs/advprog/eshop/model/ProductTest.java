@@ -36,4 +36,5 @@ public class ProductTest {
         this.product.setIdByCounter();
         assertEquals("1", this.product.getProductId());
     }
+
 }

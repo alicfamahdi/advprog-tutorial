@@ -15,4 +15,5 @@ class EshopApplicationTests {
         String[] args = { "--spring.profiles.active=test" };
         EshopApplication.main(args);
     }
+
 }
