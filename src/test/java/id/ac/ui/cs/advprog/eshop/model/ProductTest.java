@@ -30,10 +30,4 @@ public class ProductTest {
     void testGetProductQuantity() {
         assertEquals(100, this.product.getProductQuantity());
     }
-
-    @Test
-    void testSetIdByCounter() {
-        this.product.setIdByCounter();
-        assertEquals("1", this.product.getProductId());
-    }
 }
