@@ -10,4 +10,9 @@ class EshopApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    public void testMainWithArguments() {
+        String[] args = { "--spring.profiles.active=test" };
+        EshopApplication.main(args);
+    }
 }
