@@ -7,7 +7,8 @@
 <body>
 <h3>Welcome</h3>
 <p>eak</p>
-<button onClick="toProductList">Product List</button>
-<a href="@{/product/list}" onClick="toProductList"></a>
+<form th:action="@{/product/list}" method="get" style="display: inline;">
+    <button type="submit" class="btn btn-primary btn-sm mb-3">Product List</button>
+</form>
 </body>
 </html>
