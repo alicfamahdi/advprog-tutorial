@@ -18,7 +18,7 @@ class ProductServiceImplTest {
     ProductServiceImpl productService;
     @BeforeEach
     void setUp() {
-        productService.productRepository = new ProductRepository();
+        productService.setProductRepository(new ProductRepository());
     }
     @Test
     void testCreateAndFindProduct() {
