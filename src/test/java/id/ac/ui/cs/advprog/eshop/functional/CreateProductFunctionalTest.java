@@ -35,7 +35,7 @@ public class CreateProductFunctionalTest {
     }
 
     @Test
-    void createProductPage_isCorrect (ChromeDriver driver) throws Exception {
+    void createProductPage_isCorrect (ChromeDriver driver) {
         driver.get(baseUrl + "/product/create");
 
         WebElement productNameField = driver.findElement(By.id("product-name"));
