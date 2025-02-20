@@ -11,11 +11,15 @@ sonar {
         property("sonar.projectKey", "alicfamahdi_advprog-tutorial")
         property("sonar.organization", "alicfamahdi")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.gradle.skipCompile", "true")
+        property("sonar.sourceEncoding", "UTF-8")
+
+        // Test reports
+        property("sonar.junit.reportPaths", "build/test-results/test")
+
+        // JaCoCo Test Coverage Report
         property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
-
 
 group = "id.ac.ui.cs.advprog"
 version = "0.0.1-SNAPSHOT"
@@ -87,4 +91,10 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+
+    reports {
+        xml.required = true   // SonarCloud needs XML format
+        csv.required = false
+        html.required = true
+    }
 }
