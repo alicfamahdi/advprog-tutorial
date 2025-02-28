@@ -24,7 +24,7 @@ public class CarRepository {
         return carData.iterator();
     }
 
-    public Car findById(int id) {
+    public Car findById(String id) {
         for (Car car : carData) {
             if (car.getCarId().equals(id)) {
                 return car;
@@ -33,7 +33,7 @@ public class CarRepository {
         return null;
     }
 
-    public Car update (String id, Car updatedCar) {
+    public Car update(String id, Car updatedCar) {
         for (Car car : carData) {
             if (car.getCarId().equals(id)) {
                 // Update the existing car with the new information
