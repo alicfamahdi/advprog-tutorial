@@ -28,7 +28,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car findById(int id) {
+    public Car findById(String id) {
         //TODO Auto-generated method stub
         Car car = carRepository.findById(id);
         return car;
