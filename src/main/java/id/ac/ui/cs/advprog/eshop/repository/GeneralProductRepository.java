@@ -1,12 +1,14 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 abstract public class GeneralProductRepository<T extends Product> {
     private List<T> productData = new ArrayList<>();
 
@@ -28,16 +30,6 @@ abstract public class GeneralProductRepository<T extends Product> {
             if (product.getProductId().equals(id)) {
                 return product;
             }
-        }
-        return null;
-    }
-
-    public T editProduct(String id, Product newProduct) {
-        T oldProduct = findProductById(id);
-        if (oldProduct != null) {
-            oldProduct.setProductName(newProduct.getProductName());
-            oldProduct.setProductQuantity(newProduct.getProductQuantity());
-            return oldProduct;
         }
         return null;
     }
