@@ -1,11 +1,12 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
-import id.ac.ui.cs.advprog.eshop.service.ProductService;
+import id.ac.ui.cs.advprog.eshop.service.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,7 +24,7 @@ class ProductControllerTest {
     private MockMvc mockMvc;
 
     @MockitoBean
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     @Test
     void testCreateProductPage() throws Exception {
@@ -40,12 +41,12 @@ class ProductControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("list"));
 
-        Mockito.verify(productService).createProduct(any(Product.class));
+        Mockito.verify(productService).create(any(Product.class));
     }
 
     @Test
     void testProductListPage() throws Exception {
-        Mockito.when(productService.findAllProducts()).thenReturn(Collections.emptyList());
+        Mockito.when(productService.findAll()).thenReturn(Collections.emptyList());
 
         mockMvc.perform(get("/product/list"))
                 .andExpect(status().isOk())
@@ -56,7 +57,7 @@ class ProductControllerTest {
     @Test
     void testEditProductPage() throws Exception {
         Product mockProduct = new Product();
-        Mockito.when(productService.findProductById(anyString())).thenReturn(mockProduct);
+        Mockito.when(productService.findById(anyString())).thenReturn(mockProduct);
 
         mockMvc.perform(get("/product/edit/1"))
                 .andExpect(status().isOk())
@@ -71,7 +72,7 @@ class ProductControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/product/list"));
 
-        Mockito.verify(productService).editProduct(anyString(), any(Product.class));
+        Mockito.verify(productService).edit(anyString(), any(Product.class));
     }
 
     @Test
@@ -80,6 +81,6 @@ class ProductControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/product/list"));
 
-        Mockito.verify(productService).deleteProduct("1");
+        Mockito.verify(productService).delete("1");
     }
 }

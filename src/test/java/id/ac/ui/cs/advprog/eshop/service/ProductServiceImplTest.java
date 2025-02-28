@@ -7,11 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class ProductServiceImplTest {
     @InjectMocks
@@ -25,7 +27,7 @@ class ProductServiceImplTest {
         Product product = new Product();
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(100);
-        Product productByService = productService.createProduct(product);
+        Product productByService = productService.create(product);
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         assertNotNull(productByService);
@@ -36,7 +38,7 @@ class ProductServiceImplTest {
 
     @Test
     void testFindAllIfEmpty() {
-        List<Product> productList = productService.findAllProducts();
+        List<Product> productList = productService.findAll();
         assertTrue(productList.isEmpty());
     }
 
@@ -46,15 +48,15 @@ class ProductServiceImplTest {
         product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
-        productService.createProduct(product1);
+        productService.create(product1);
 
         Product product2 = new Product();
         product2.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
         product2.setProductName("Sampo Cap Usep");
         product2.setProductQuantity(50);
-        productService.createProduct(product2);
+        productService.create(product2);
 
-        List<Product> productList = productService.findAllProducts();
+        List<Product> productList = productService.findAll();
         assertFalse(productList.isEmpty());
         Product foundProduct = productList.getFirst();
         assertEquals(product1.getProductId(), foundProduct.getProductId());
@@ -67,7 +69,7 @@ class ProductServiceImplTest {
         Product product1 = new Product();
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
-        productService.createProduct(product1);
+        productService.create(product1);
         product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         Product product2 = new Product();
@@ -75,7 +77,7 @@ class ProductServiceImplTest {
         product2.setProductName("Sampo Cap Usep");
         product2.setProductQuantity(50);
 
-        productService.editProduct("eb558e9f-1c39-460e-8860-71af6af63bd6", product2);
+        productService.edit("eb558e9f-1c39-460e-8860-71af6af63bd6", product2);
         assertEquals("Sampo Cap Usep", product1.getProductName());
         assertEquals(50, product1.getProductQuantity());
     }
@@ -86,10 +88,10 @@ class ProductServiceImplTest {
         product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
-        productService.createProduct(product1);
+        productService.create(product1);
 
-        productService.deleteProduct(product1.getProductId());
-        List<Product> productList = productService.findAllProducts();
+        productService.delete(product1.getProductId());
+        List<Product> productList = productService.findAll();
         assertTrue(productList.isEmpty());
     }
 
@@ -99,20 +101,20 @@ class ProductServiceImplTest {
         product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
-        productService.createProduct(product1);
+        productService.create(product1);
 
         Product product2 = new Product();
         product2.setProductId(product1.getProductId());
         product2.setProductName("Sampo Cap Usep");
         product2.setProductQuantity(50);
-        productService.editProduct(product2.getProductId(), product2);
+        productService.edit(product2.getProductId(), product2);
 
-        List<Product> productList = productService.findAllProducts();
+        List<Product> productList = productService.findAll();
         Product foundProduct = productList.getFirst();
         assertNotNull(foundProduct);
 
-        productService.deleteProduct(product2.getProductId());
-        productList = productService.findAllProducts();
+        productService.delete(product2.getProductId());
+        productList = productService.findAll();
         assertTrue(productList.isEmpty());
     }
 
@@ -123,7 +125,7 @@ class ProductServiceImplTest {
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
 
-        Product foundProduct = productService.findProductById(product1.getProductId());
+        Product foundProduct = productService.findById(product1.getProductId());
         assertNull(foundProduct);
     }
 
