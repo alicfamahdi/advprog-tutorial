@@ -22,13 +22,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
-        productRepository.createProduct(product);
+        productRepository.create(product);
         return product;
     }
 
     @Override
     public List<Product> findAllProducts() {
-        Iterator<Product> productIterator = productRepository.findAllProducts();
+        Iterator<Product> productIterator = productRepository.findAll();
         List<Product> allProducts = new ArrayList<>();
         productIterator.forEachRemaining(allProducts::add);
         return allProducts;
@@ -41,11 +41,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findProductById(String id) {
-        return productRepository.findProductById(id);
+        return productRepository.findById(id);
     }
 
     @Override
     public void deleteProduct(String productId) {
-        productRepository.deleteProduct(productId);
+        productRepository.delete(productId);
     }
 }

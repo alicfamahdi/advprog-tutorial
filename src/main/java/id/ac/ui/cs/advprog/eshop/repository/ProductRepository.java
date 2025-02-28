@@ -11,7 +11,7 @@ public class ProductRepository extends GeneralProductRepository<Product>{
     private List<Product> productData = new ArrayList<>();
 
     public Product editProduct(String id, Product newProduct) {
-        Product oldProduct = super.findProductById(id);
+        Product oldProduct = super.findById(id);
         if (oldProduct != null) {
             oldProduct.setProductName(newProduct.getProductName());
             oldProduct.setProductQuantity(newProduct.getProductQuantity());
