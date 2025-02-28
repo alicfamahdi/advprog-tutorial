@@ -23,7 +23,7 @@ class ProductRepositoryTest {
         productRepository.create(product);
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
-        Iterator<Product> productIterator = productRepository.findAllProducts();
+        Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
         Product foundProduct = productIterator.next();
         assertEquals(product.getProductId(), foundProduct.getProductId());
@@ -34,7 +34,7 @@ class ProductRepositoryTest {
 
     @Test
     void testFindAllIfEmpty() {
-        Iterator<Product> productIterator = productRepository.findAllProducts();
+        Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
     }
 
@@ -52,7 +52,7 @@ class ProductRepositoryTest {
         productRepository.create(product2);
         product2.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
 
-        Iterator<Product> productIterator = productRepository.findAllProducts();
+        Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
         Product foundProduct = productIterator.next();
         assertEquals(product1.getProductId(), foundProduct.getProductId());
@@ -88,7 +88,7 @@ class ProductRepositoryTest {
         product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
 
         productRepository.delete(product1.getProductId());
-        Iterator<Product> productIterator = productRepository.findAllProducts();
+        Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
     }
 
@@ -106,13 +106,13 @@ class ProductRepositoryTest {
         product2.setProductQuantity(50);
         productRepository.editProduct(product2.getProductId(), product2);
 
-        Iterator<Product> productIterator = productRepository.findAllProducts();
+        Iterator<Product> productIterator = productRepository.findAll();
         Product foundProduct = productIterator.next();
         assertNotNull(foundProduct);
         assertFalse(productIterator.hasNext());
 
         productRepository.delete(product2.getProductId());
-        productIterator = productRepository.findAllProducts();
+        productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
     }
 
