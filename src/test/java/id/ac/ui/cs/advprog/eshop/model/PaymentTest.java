@@ -34,63 +34,41 @@ public class PaymentTest {
         paymentData = new HashMap<String, String>();
     }
 
-//    happy order
+//    all is well
     @Test
-    void testCreatePaymentEmptyOrder() {
+    void testCreatePayment() {
         this.order = null;
 
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "BANK_TRANSFER", paymentData);
-        });
-    }
-
-//    empty order
-    @Test
-    void testCreatePaymentEmptyOrder() {
-        this.order = null;
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "BANK_TRANSFER", paymentData);
-        });
-    }
-
-//    right method
-    @Test
-    void testCreatePaymentInvalidPaymentData() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Map<String, String> invalidPaymentData = new HashMap<>();
-            invalidPaymentData.put("BANK_TRANSFER", "BANK_TRANSFER");
-            Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "BANK_TRANSFER", invalidPaymentData);
         });
     }
 
 //    wrong method
     @Test
-    void testCreatePaymentInvalidPaymentData() {
+    void testCreatePaymentInvalidMethod() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Map<String, String> invalidPaymentData = new HashMap<>();
-            invalidPaymentData.put("BANK_TRANSFER", "BANK_TRANSFER");
-            Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "BANK_TRANSFER", invalidPaymentData);
-        });
-    }
-
-//    right paymentdata
-    @Test
-    void testCreatePaymentInvalidPaymentData() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Map<String, String> invalidPaymentData = new HashMap<>();
-            invalidPaymentData.put("BANK_TRANSFER", "BANK_TRANSFER");
-            Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "BANK_TRANSFER", invalidPaymentData);
+            Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "hah", paymentData);
         });
     }
 
 //    wrong payment data
     @Test
     void testCreatePaymentInvalidPaymentData() {
+        Map<String, String> invalidPaymentData = new HashMap<>();
+        invalidPaymentData.put("kucing", "meong");
+
         assertThrows(IllegalArgumentException.class, () -> {
-            Map<String, String> invalidPaymentData = new HashMap<>();
-            invalidPaymentData.put("BANK_TRANSFER", "BANK_TRANSFER");
             Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "BANK_TRANSFER", invalidPaymentData);
+        });
+    }
+
+//    wrong set state
+    @Test
+    void testSetInvalidStatus() {
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "BANK_TRANSFER", paymentData);
+        assertThrows(IllegalArgumentException.class, () -> {
+            payment.setStatus("green day");
         });
     }
 }
