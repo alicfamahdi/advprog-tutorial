@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentTest {
     Order order;
@@ -70,6 +70,96 @@ public class PaymentTest {
         assertThrows(IllegalArgumentException.class, () -> {
             payment.setStatus("green day");
         });
+    }
+
+//    right voucher
+    @Test
+    void testValidateVoucherCode() {
+        Map<String, String> validVoucherCode = new HashMap<>();
+        validVoucherCode.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validVoucherCode);
+        assertTrue(payment.validateVoucherCode());
+    }
+
+//    voucher code not 16 characters
+    @Test
+    void testInvalidVoucher16Chars() {
+        Map<String, String> validVoucherCode = new HashMap<>();
+        validVoucherCode.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validVoucherCode);
+        String orderStatus = payment.getOrder().getStatus();
+
+        assertSame(payment.getOrder(), order);
+        assertEquals("REJECTED", payment.getStatus());
+        assertEquals("FAILED", orderStatus);
+    }
+//    voucher code wrong start
+    @Test
+    void testInvalidVoucherStarter() {
+        Map<String, String> validVoucherCode = new HashMap<>();
+        validVoucherCode.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validVoucherCode);
+        String orderStatus = payment.getOrder().getStatus();
+
+        assertSame(payment.getOrder(), order);
+        assertEquals("REJECTED", payment.getStatus());
+        assertEquals("FAILED", orderStatus);
+
+    }
+//    voucher code no 8 numerical
+    @Test
+    void testInvalidVoucher8Numerical() {
+        Map<String, String> validVoucherCode = new HashMap<>();
+        validVoucherCode.put("voucherCode", "ESHOP1234ABC5678");
+
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validVoucherCode);
+        String orderStatus = payment.getOrder().getStatus();
+
+        assertSame(payment.getOrder(), order);
+        assertEquals("REJECTED", payment.getStatus());
+        assertEquals("FAILED", orderStatus);
+
+    }
+//    right bank name ref code
+    @Test
+    void testValidateBankTransfer() {
+        Map<String, String> validBankData = new HashMap<>();
+        validBankData.put("bankName", "BCA");
+        validBankData.put("referenceCode", "OIIAI");
+
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validBankData);
+
+        assertSame(payment.getOrder(), order);
+        assertEquals("SUCCESS", payment.getStatus());
+    }
+//    bank name null
+    @Test
+    void testBankNameNull() {
+        Map<String, String> validBankData = new HashMap<>();
+        validBankData.put("referenceCode", "OIIAI");
+
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validBankData);
+        String orderStatus = payment.getOrder().getStatus();
+
+        assertSame(payment.getOrder(), order);
+        assertEquals("REJECTED", payment.getStatus());
+        assertEquals("FAILED", orderStatus);
+    }
+//    reference code null
+    @Test
+    void testReferenceCodeNull() {
+        Map<String, String> validBankData = new HashMap<>();
+        validBankData.put("bankName", "BCA");
+
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validVoucherCode);
+        String orderStatus = payment.getOrder().getStatus();
+
+        assertSame(payment.getOrder(), order);
+        assertEquals("REJECTED", payment.getStatus());
+        assertEquals("FAILED", orderStatus);
     }
 }
 

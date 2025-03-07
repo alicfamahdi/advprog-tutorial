@@ -20,4 +20,12 @@ public class Payment {
 
     public void setStatus(String status) {
     }
+
+    public boolean validateVoucherCode() {
+        return false;
+    }
+
+    public boolean validatePaymentCode() {
+        return false;
+    }
 }
