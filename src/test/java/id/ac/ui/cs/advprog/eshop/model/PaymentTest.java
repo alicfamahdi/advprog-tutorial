@@ -154,7 +154,7 @@ public class PaymentTest {
         Map<String, String> validBankData = new HashMap<>();
         validBankData.put("bankName", "BCA");
 
-        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validVoucherCode);
+        Payment payment = new Payment("26299032-6747-46e8-ae48-aac9e4707e75", order, "VOUCHER", validBankData);
         String orderStatus = payment.getOrder().getStatus();
 
         assertSame(payment.getOrder(), order);
