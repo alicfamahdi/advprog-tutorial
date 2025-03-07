@@ -1,24 +1,19 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Order;
+import id.ac.ui.cs.advprog.eshop.model.Payment;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PaymentRepository {
     private List<Order> orderData = new ArrayList<>();
 
-    public Order save (Order order) {
-        return null;
-    }
-
-    public Order findById(String id) {
-        return null;
-    }
-
-    public List<Order> findAllByAuthor(String author) {
-        return null;
-    }
+    public Payment addPayment(Order order, String method, Map<String, String> paymentData)
+    public Payment setStatus(Payment payment, String status)
+    public Payment getPayment(String paymentId)
+    public Payment getAllPayments()
 }
