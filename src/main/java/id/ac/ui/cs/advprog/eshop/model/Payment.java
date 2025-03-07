@@ -39,10 +39,13 @@ public class Payment {
     public void processMethod(String method) {
         boolean isValid = false;
 
-        if (method.equals("voucherCode")) {
+        if (method.equals("VOUCHER")) {
             isValid = validateVoucherCode();
-        } else if(method.equals("bankTransfer")){
+        } else if (method.equals("BANK_TRANSFER")) {
             isValid = validateBankTransfer();
+        }
+        else {
+            throw new IllegalArgumentException("Invalid method: " + method);
         }
 
         if (isValid) {
@@ -57,13 +60,13 @@ public class Payment {
     public boolean validateVoucherCode() {
         String voucherCode = paymentData.get("voucherCode");
 
-        if(voucherCode == null || voucherCode.isEmpty()){
+        if (voucherCode == null || voucherCode.isEmpty()) {
             return false;
         }
 
-        if(voucherCode.length() != 16){
+        if (voucherCode.length() != 16) {
             return false;
-        } else if (!voucherCode.startsWith("ESHOP")){
+        } else if (!voucherCode.startsWith("ESHOP")) {
             return false;
         } else {
             int counter = 0;
